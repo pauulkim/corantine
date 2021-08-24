@@ -1,5 +1,5 @@
 # Background and Overview
-Pandemic is a data visualization on the COVID pandemic. The number of COVID cases and deaths will be displayed.
+Corantine is a data visualization on the COVID pandemic. The number of COVID cases and deaths will be displayed.
 
 # Functionality and MVPs
 Users will be able to:
