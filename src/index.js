@@ -12,19 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
     [100, 140]
   ];
   
-  // create svg element for data viz
+  // set constants
   const width = 800;
   const height = 500;
-
+  const margin = 200;
+  
+  // create svg element for data viz
   const svg = d3.select("#covid-viz")
     .append("svg")
     .attr("width", width)
     .attr("height", height)
 
   // set margins for graph
-  const margin = 200;
   const adjWidth = svg.attr("width") - margin
   const adjHeight = svg.attr("height") - margin
 
-  
+  // set the scale
+  const xScale = d3.scaleLinear().domain([0, 100]).range([0, adjWidth])
+  const yScale = d3.scaleLinear().domain([0, 200]).range([adjHeight, 0])
 })
