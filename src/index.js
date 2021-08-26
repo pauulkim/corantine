@@ -30,4 +30,33 @@ document.addEventListener("DOMContentLoaded", () => {
   // set the scale
   const xScale = d3.scaleLinear().domain([0, 100]).range([0, adjWidth])
   const yScale = d3.scaleLinear().domain([0, 200]).range([adjHeight, 0])
+
+  // add text
+  // title
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", 50)
+    .attr("text-anchor", "middle")
+    // .style("font-family", "Helvetica")
+    .style("font-size", 20)
+    .text("Test title")
+  // x-axis
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", height - 50)
+    .attr("text-anchor", "middle")
+    // .style("font-family", "Helvetica")
+    .style("font-size", 15)
+    .text("x-axis")
+  // y-axis
+  svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(60," + height / 2 + ") rotate(-90)")
+    // .style("font-family", "Helvetica")
+    .style("font-size", 15)
+    .text("y-axis")
+    
+    
+
+
 })
