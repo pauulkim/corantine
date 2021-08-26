@@ -56,7 +56,5 @@ document.addEventListener("DOMContentLoaded", () => {
     .style("font-size", 15)
     .text("y-axis")
     
-    
-
-
+  // add axis lines
 })
