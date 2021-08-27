@@ -57,4 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .text("y-axis")
     
   // add axis lines
+
+
+  // test api
+  fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=7`)
+    .then( apiResponse => apiResponse.json() )
+    .then( data => console.log(data))
 })
