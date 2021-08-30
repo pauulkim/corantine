@@ -11,7 +11,10 @@ class LineChart {
       .then( apiResponse => apiResponse.json() )
       .then( data => {
         let newData = data["cases"];
-        let cases = Object.keys(newData).map( (date) => [d3.timeParse("%m/%d/%Y")(date), newData[date]])
+        let cases = Object.keys(newData).map( (date) => ({
+          date: d3.timeParse("%m/%d/%y")(date),
+          count: newData[date]
+        }));
         console.log(cases)
       })
   };
