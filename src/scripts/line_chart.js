@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+
 class LineChart {
   constructor(svg) {
     this.svg = svg;
@@ -7,7 +9,11 @@ class LineChart {
   display(numDays) {
     fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=${numDays}`)
       .then( apiResponse => apiResponse.json() )
-      .then( data => console.log(data))
+      .then( data => {
+        let newData = data["cases"];
+        let cases = Object.keys(newData).map( (date) => [d3.timeParse("%m/%d/%Y")(date), newData[date]])
+        console.log(cases)
+      })
   };
 };
 

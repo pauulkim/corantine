@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   let line = new LineChart(svg);
-  line.display(7);
+  line.display(365);
 
   // let lineChart = 
   
