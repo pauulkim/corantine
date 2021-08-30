@@ -14,13 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-    // .append("g")
-    //   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  let line = new LineChart(svg);
+  let line = new LineChart(svg, margin, width, height);
   line.display(7);
 
-  // let lineChart = 
   
 
 
@@ -56,8 +55,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // // add axis lines
 
 
-  // test api
-  // fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=7`)
-  //   .then( apiResponse => apiResponse.json() )
-  //   .then( data => console.log(data))
 })
