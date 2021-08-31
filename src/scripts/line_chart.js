@@ -34,15 +34,14 @@ class LineChart {
 
   drawLines(data, x, y, color) {
     this.svg.append("path")
-    .datum(data)
-    .attr("fill", "none")
-    .attr("stroke", color)
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.date) })
-      .y(function(d) { return y(d.value) })
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", color)
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.value) })
       )
-
   };
   
   display(numDays) {
