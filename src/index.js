@@ -4,20 +4,8 @@ import LineChart from "./scripts/line_chart"
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
 
-  // set dimensions and margins of graph
-  const margin = { top: 10, right: 30, bottom: 30, left: 90 },
-        width = 800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
-
-  // create svg element for data viz
-  const svg = d3.select("#line-chart")
-    .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  let line = new LineChart(svg, margin, width, height);
+  // display line chart
+  let line = new LineChart();
   line.display(7);
 
   
