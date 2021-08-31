@@ -8,25 +8,33 @@ class LineChart {
     this.height = height;
   };
 
-  drawAxes(data) {
-    // add x axis
+  scaleData(data) {
     let x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.date; }))
       .range([ 0, this.width ]);
-  
-    this.svg.append("g")
-      .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(x));
-  
-    // add y axis
+    
     let y = d3.scaleLinear()
       .domain([ 0, d3.max(data, function(d) { return d.value })])
       .range([ this.height, 0 ]);
+
+    return [x, y];
+  };
   
+  drawAxes(x, y) {
+    // add x axis
+    this.svg.append("g")
+      .attr("transform", "translate(0," + this.height + ")")
+      .call(d3.axisBottom(x));
+    
+    // add y axis
     this.svg.append("g")
       .call(d3.axisLeft(y));
-  }
+  };
 
+  drawLines(data, x, y) {
+
+  };
+  
   display(numDays) {
     // get data
     fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=${numDays}`)
@@ -39,9 +47,14 @@ class LineChart {
           value: casesData[date]
         }));
 
-
+        // get scaling functions to plot
+        let [x, y] = this.scaleData(cases);
+        
         // draw axes
-        this.drawAxes(cases);
+        this.drawAxes(x, y);
+
+        // draw lines
+        
       })
   };
 };
