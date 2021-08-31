@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import formatData from "./format_data";
 
 class LineChart {
   constructor(svg, margin, width, height) {
@@ -49,26 +50,14 @@ class LineChart {
     fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=${numDays}`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
-        // format case data
-        let casesData = data.cases;
-        let cases = Object.keys(casesData).map( (date) => ({
-          date: d3.timeParse("%m/%d/%y")(date),
-          value: casesData[date]
-        }));
-        
-        // format death data
-        let deathData = data.deaths;
-        let deaths = Object.keys(deathData).map( (date) => ({
-          date: d3.timeParse("%m/%d/%y")(date),
-          value: deathData[date]
-        }));
+        // format case and death data
+        let cases = formatData(data, "cases");
+        let deaths = formatData(data, "deaths");
 
         // get scaling functions to plot
         let [x, y] = this.scaleData(cases);
-        
-        // draw axes
-        this.drawAxes(x, y);
-
+        // draw axes 
+        this.drawAxes(x, y); 
         // draw lines
         this.drawLines(cases, x, y, "steelblue");
         this.drawLines(deaths, x, y, "red");
