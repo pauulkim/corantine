@@ -2,10 +2,10 @@ import * as d3 from "d3";
 
 class LineChart {
   constructor(svg, margin, width, height) {
+    this.svg = svg;
     this.margin = margin;
     this.width = width;
     this.height = height;
-    this.svg = svg;
   };
 
   drawAxes(data) {
