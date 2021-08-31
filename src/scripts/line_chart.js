@@ -6,23 +6,23 @@ class LineChart {
     this.margin = margin;
     this.width = width;
     this.height = height;
-    // this.numDays = numDays;
   };
 
   display(numDays) {
+    // get data
     fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=${numDays}`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
         // format data
-        let subset = data["cases"];
-        let newData = Object.keys(subset).map( (date) => ({
+        let casesData = data.cases;
+        let cases = Object.keys(casesData).map( (date) => ({
           date: d3.timeParse("%m/%d/%y")(date),
-          value: subset[date]
+          value: casesData[date]
         }));
 
         // add x axis
         let x = d3.scaleTime()
-          .domain(d3.extent(newData, function(d) { return d.date; }))
+          .domain(d3.extent(cases, function(d) { return d.date; }))
           .range([ 0, this.width ]);
 
         this.svg.append("g")
@@ -31,7 +31,7 @@ class LineChart {
 
         // add y axis
         let y = d3.scaleLinear()
-          .domain([ 0, d3.max(newData, function(d) { return d.value })])
+          .domain([ 0, d3.max(cases, function(d) { return d.value })])
           .range([ this.height, 0 ]);
 
         this.svg.append("g")
