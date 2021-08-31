@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
 
   // set dimensions and margins of graph
-  const margin = { top: 10, right: 30, bottom: 30, left: 60 },
+  const margin = { top: 10, right: 30, bottom: 30, left: 90 },
         width = 800 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 

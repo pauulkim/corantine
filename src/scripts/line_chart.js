@@ -23,12 +23,19 @@ class LineChart {
         // add x axis
         let x = d3.scaleTime()
           .domain(d3.extent(newData, function(d) { return d.date; }))
-          .range([ 0, this.width ])
+          .range([ 0, this.width ]);
 
         this.svg.append("g")
           .attr("transform", "translate(0," + this.height + ")")
-          .call(d3.axisBottom(x))
+          .call(d3.axisBottom(x));
 
+        // add y axis
+        let y = d3.scaleLinear()
+          .domain([ 0, d3.max(newData, function(d) { return d.value })])
+          .range([ this.height, 0 ]);
+
+        this.svg.append("g")
+          .call(d3.axisLeft(y));
       })
   };
 };
