@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // set dimensions and margins of line chart
   let margin = { top: 10, right: 30, bottom: 30, left: 90 },
       width = 800 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      height = 450 - margin.top - margin.bottom;
 
   // create svg element for line chart
   const svgLine = d3.select("#line-chart")
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // display line chart
   let line = new LineChart(svgLine, margin, width, height);
-  line.display(7);
+  line.display(700);
 
   
 

@@ -31,7 +31,16 @@ class LineChart {
       .call(d3.axisLeft(y));
   };
 
-  drawLines(data, x, y) {
+  drawLines(data, x, y, color) {
+    this.svg.append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", color)
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.date) })
+      .y(function(d) { return y(d.value) })
+      )
 
   };
   
@@ -40,11 +49,18 @@ class LineChart {
     fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=${numDays}`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
-        // format data
+        // format case data
         let casesData = data.cases;
         let cases = Object.keys(casesData).map( (date) => ({
           date: d3.timeParse("%m/%d/%y")(date),
           value: casesData[date]
+        }));
+        
+        // format death data
+        let deathData = data.deaths;
+        let deaths = Object.keys(deathData).map( (date) => ({
+          date: d3.timeParse("%m/%d/%y")(date),
+          value: deathData[date]
         }));
 
         // get scaling functions to plot
@@ -54,7 +70,8 @@ class LineChart {
         this.drawAxes(x, y);
 
         // draw lines
-        
+        this.drawLines(cases, x, y, "steelblue");
+        this.drawLines(deaths, x, y, "red");
       })
   };
 };
