@@ -1,19 +1,11 @@
 import * as d3 from "d3";
 
 class LineChart {
-  constructor() {
-    // set dimensions and margins of graph
-    this.margin = { top: 10, right: 30, bottom: 30, left: 90 };
-    this.width = 800 - this.margin.left - this.margin.right;
-    this.height = 500 - this.margin.top - this.margin.bottom;
-
-    // create svg element for data viz
-    this.svg = d3.select("#line-chart")
-      .append("svg")
-        .attr("width", this.width + this.margin.left + this.margin.right)
-        .attr("height", this.height + this.margin.top + this.margin.bottom)
-      .append("g")
-        .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");;
+  constructor(svg, margin, width, height) {
+    this.margin = margin;
+    this.width = width;
+    this.height = height;
+    this.svg = svg;
   };
 
   drawAxes(data) {
@@ -46,6 +38,7 @@ class LineChart {
           date: d3.timeParse("%m/%d/%y")(date),
           value: casesData[date]
         }));
+
 
         // draw axes
         this.drawAxes(cases);
