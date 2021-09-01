@@ -21,9 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
   let line = new LineChart(svgLine, margin, width, height);
   line.display(700);
 
-  // create dropdown
-  
 
+
+  // create dropdown (TEST)
+  const days = ["", "14", "30", "60", "120", "240", "365", "700"]
+
+  d3.select("#num-days")
+    .append("p")
+    .text("Select days passed")
+
+  let selectDays = d3.select("#num-days")
+    .append("select")
+
+  days.forEach( day => {
+    let daysOption = selectDays.append("option")
+    if (day !== "") daysOption.text(day + " days")
+    daysOption.property("value", day)
+  })
+
+  selectDays.on("change", e => {
+    
+    line = new LineChart(svgLine, margin, width, height);
+    line.display(e.target.value);
+  })
 
   // // add text
   // // title
