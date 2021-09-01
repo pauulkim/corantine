@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let margin = { top: 10, right: 30, bottom: 30, left: 90 },
       width = 800 - margin.left - margin.right,
       height = 450 - margin.top - margin.bottom;
-
   // create svg element for line chart
   const svgLine = d3.select("#line-chart")
     .append("svg")
@@ -18,15 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .attr("id", "base");
+      .attr("id", "line-chart-container");
   
   // display default line chart
   let line = new LineChart(svgLine, margin, width, height);
   line.display(30);
 
-
-
-  // create dropdown (TEST)
+  // create dropdown for linechart
   const days = {"30 days": "30", 
                 "60 days": "60", 
                 "120 days": "120", 
@@ -34,26 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 "365 days": "365", 
                 "720 days": "720"};
 
-  let selectDays = dropdown("#num-days", days, "Select days passed");
+  let selectedDays = dropdown("#num-days", days, "Select days passed");
 
-  // d3.select("#num-days")
-  //   .append("p")
-  //   .text("Select days passed")
-
-  // let selectDays = d3.select("#num-days")
-  //   .append("select")
-
-  // days.forEach( day => {
-  //   let daysOption = selectDays.append("option")
-  //   if (day !== "") daysOption.text(day + " days")
-  //   daysOption.property("value", day)
-  // })
-
-  selectDays.on("change", e => {
-    d3.selectAll("#base > *").remove();
+  // event listener for days selected
+  selectedDays.on("change", e => {
+    d3.selectAll("#line-chart-container > *").remove();
     line = new LineChart(svgLine, margin, width, height);
     line.display(e.target.value);
-  })
+  });
+
+  
 
   // // add text
   // // title
