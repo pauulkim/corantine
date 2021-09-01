@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import formatData from "./format_data";
+import formatData from "./helpers/format_data";
 
 class LineChart {
   constructor(svg, margin, width, height) {

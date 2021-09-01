@@ -18,14 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .attr("id", "base");
   
-  // display line chart
+  // display default line chart
   let line = new LineChart(svgLine, margin, width, height);
-  line.display(700);
+  line.display(30);
 
 
 
   // create dropdown (TEST)
-  const days = ["", "14", "30", "60", "120", "240", "365", "700"]
+  const days = ["30", "60", "120", "240", "365", "720"]
 
   d3.select("#num-days")
     .append("p")
