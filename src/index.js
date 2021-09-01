@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .attr("id", "base");
   
   // display line chart
   let line = new LineChart(svgLine, margin, width, height);
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   selectDays.on("change", e => {
-    
+    d3.selectAll("#base > *").remove();
     line = new LineChart(svgLine, margin, width, height);
     line.display(e.target.value);
   })
