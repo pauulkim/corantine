@@ -1,5 +1,6 @@
 import * as d3 from "d3";
-import LineChart from "./scripts/line_chart"
+import LineChart from "./scripts/line_chart";
+import dropdown from "./scripts/helpers/dropdown";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
@@ -26,20 +27,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // create dropdown (TEST)
-  const days = ["30", "60", "120", "240", "365", "720"]
+  const days = {"30 days": "30", 
+                "60 days": "60", 
+                "120 days": "120", 
+                "240 days": "240", 
+                "365 days": "365", 
+                "720 days": "720"};
 
-  d3.select("#num-days")
-    .append("p")
-    .text("Select days passed")
+  let selectDays = dropdown("#num-days", days, "Select days passed");
 
-  let selectDays = d3.select("#num-days")
-    .append("select")
+  // d3.select("#num-days")
+  //   .append("p")
+  //   .text("Select days passed")
 
-  days.forEach( day => {
-    let daysOption = selectDays.append("option")
-    if (day !== "") daysOption.text(day + " days")
-    daysOption.property("value", day)
-  })
+  // let selectDays = d3.select("#num-days")
+  //   .append("select")
+
+  // days.forEach( day => {
+  //   let daysOption = selectDays.append("option")
+  //   if (day !== "") daysOption.text(day + " days")
+  //   daysOption.property("value", day)
+  // })
 
   selectDays.on("change", e => {
     d3.selectAll("#base > *").remove();
