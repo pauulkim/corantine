@@ -60,6 +60,32 @@ class LineChart {
       .text("Value");
   };
 
+  addLegend() {
+    // cases
+    this.svg.append("circle")
+      .attr("cx", 635)
+      .attr("r", 5)
+      .style("fill", "steelblue")
+    this.svg.append("text")
+      .attr("x", 635 + 10)
+      .style("font-size", "14px")
+      .attr("alignment-baseline","middle")
+      .text("cases")
+
+    // deaths
+    this.svg.append("circle")
+      .attr("cx", 635)
+      .attr("cy", 15)
+      .attr("r", 5)
+      .style("fill", "red")
+    this.svg.append("text")
+      .attr("x", 635 + 10)
+      .attr("y", 15)
+      .style("font-size", "14px")
+      .attr("alignment-baseline","middle")
+      .text("deaths")
+  };
+
   drawLines(data, x, y, color) {
     this.svg.append("path")
       .datum(data)
@@ -81,12 +107,10 @@ class LineChart {
         let cases = formatLineData(data, "cases");
         let deaths = formatLineData(data, "deaths");
 
-        // get scaling functions to plot
-        let [x, y] = this.scaleData(cases);
-        // draw axes 
-        this.drawAxes(x, y); 
-        // add labels
-        this.addLabels(numDays);
+        let [x, y] = this.scaleData(cases); // get scaling functions to plot
+        this.drawAxes(x, y); // draw axes
+        this.addLabels(numDays); // add labels
+        this.addLegend(); // add legend
         // draw lines
         this.drawLines(cases, x, y, "steelblue");
         this.drawLines(deaths, x, y, "red");

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // *** put into helper function? ***
   // set dimensions and margins of line chart
-  let margin = { top: 40, right: 30, bottom: 35, left: 100 },
+  let margin = { top: 40, right: 100, bottom: 35, left: 100 },
       width = 800 - margin.left - margin.right,
       height = 450 - margin.top - margin.bottom;
   // create svg element for line chart
