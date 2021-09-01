@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const formatData = (data, type) => {
+const formatLineData = (data, type) => {
   let subset = data[type];
   let newData = Object.keys(subset).map( (date) => ({
     date: d3.timeParse("%m/%d/%y")(date),
@@ -10,4 +10,4 @@ const formatData = (data, type) => {
   return newData;
 };
 
-export default formatData;
+export default formatLineData;

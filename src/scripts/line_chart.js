@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import formatData from "./helpers/format_data";
+import formatLineData from "./helpers/format_data";
 
 class LineChart {
   constructor(svg, margin, width, height) {
@@ -50,8 +50,8 @@ class LineChart {
       .then( apiResponse => apiResponse.json() )
       .then( data => {
         // format case and death data
-        let cases = formatData(data, "cases");
-        let deaths = formatData(data, "deaths");
+        let cases = formatLineData(data, "cases");
+        let deaths = formatLineData(data, "deaths");
 
         // get scaling functions to plot
         let [x, y] = this.scaleData(cases);

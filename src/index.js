@@ -4,6 +4,7 @@ import LineChart from "./scripts/line_chart"
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
 
+  // *** put into helper function? ***
   // set dimensions and margins of line chart
   let margin = { top: 10, right: 30, bottom: 30, left: 90 },
       width = 800 - margin.left - margin.right,
