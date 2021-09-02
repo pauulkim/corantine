@@ -25,7 +25,7 @@ class LineChart {
     // add x axis
     this.svg.append("g")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x).ticks(7));
     
     // add y axis
     this.svg.append("g")
