@@ -39,7 +39,7 @@ class LineChart {
       .attr("y", 0 - (this.margin.top / 2))
       .attr("text-anchor", "middle")
       .style("font-size", "18px")
-      .text(`Number of Covid Cases Globally in the Past ${numDays} Days`);
+      .text(`Number of Covid Cases and Deaths Globally in the Past ${numDays} Days`);
 
     // add x axis label
     this.svg.append("text")

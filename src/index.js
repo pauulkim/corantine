@@ -1,26 +1,22 @@
 import * as d3 from "d3";
+import createSVG from "./scripts/helpers/create_svg";
 import LineChart from "./scripts/line_chart";
 import dropdown from "./scripts/helpers/dropdown";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
 
-  // *** put into helper function? ***
-  // set dimensions and margins of line chart
-  let margin = { top: 40, right: 100, bottom: 35, left: 100 },
-      width = 800 - margin.left - margin.right,
-      height = 450 - margin.top - margin.bottom;
+  // set margins for line chart
+  const lineMargin = { top: 40, right: 100, bottom: 35, left: 100 },
+        lineWidth = 800 - lineMargin.left - lineMargin.right,
+        lineHeight = 450 - lineMargin.top - lineMargin.bottom;
+
   // create svg element for line chart
-  const svgLine = d3.select("#line-chart")
-    .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .attr("id", "line-chart-container");
-  
+  const lineID = "line-chart-container";
+  const lineSVG = createSVG("#line-chart", lineID, lineMargin, lineWidth, lineHeight);
+
   // display default line chart
-  let line = new LineChart(svgLine, margin, width, height);
+  let line = new LineChart(lineSVG, lineMargin, lineWidth, lineHeight);
   line.display(30);
 
   // create dropdown for linechart
@@ -35,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // event listener for days selected
   selectedDays.on("change", e => {
-    d3.selectAll("#line-chart-container > *").remove();
-    line = new LineChart(svgLine, margin, width, height);
+    d3.selectAll(`#${lineID} > *`).remove();
+    line = new LineChart(lineSVG, lineMargin, lineWidth, lineHeight);
     line.display(e.target.value);
   });
 })
