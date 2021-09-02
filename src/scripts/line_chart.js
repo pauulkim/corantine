@@ -65,25 +65,25 @@ class LineChart {
     this.svg.append("circle")
       .attr("cx", 635)
       .attr("r", 5)
-      .style("fill", "steelblue")
+      .style("fill", "steelblue");
     this.svg.append("text")
       .attr("x", 635 + 10)
       .style("font-size", "14px")
       .attr("alignment-baseline","middle")
-      .text("cases")
+      .text("cases");
 
     // deaths
     this.svg.append("circle")
       .attr("cx", 635)
       .attr("cy", 15)
       .attr("r", 5)
-      .style("fill", "red")
+      .style("fill", "red");
     this.svg.append("text")
       .attr("x", 635 + 10)
       .attr("y", 15)
       .style("font-size", "14px")
       .attr("alignment-baseline","middle")
-      .text("deaths")
+      .text("deaths");
   };
 
   drawLines(data, x, y, color) {
@@ -114,7 +114,7 @@ class LineChart {
         // draw lines
         this.drawLines(cases, x, y, "steelblue");
         this.drawLines(deaths, x, y, "red");
-      })
+      });
   };
 };
 
