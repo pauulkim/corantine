@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import createSVG from "./scripts/helpers/create_svg";
 import LineChart from "./scripts/line_chart";
+import BarChart from "./scripts/bar_chart";
 import dropdown from "./scripts/helpers/dropdown";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,5 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const barID = "bar-chart-container";
   const barSVG = createSVG("#bar-chart", barID, barM, barW, barH);
 
-  
+  // display default
+  let bar = new BarChart(barSVG, barM, barW, barH);
+  bar.display("cases");
 })
