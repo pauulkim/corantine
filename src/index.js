@@ -6,6 +6,7 @@ import dropdown from "./scripts/helpers/dropdown";
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
 
+  // LINE CHART
   // set margins for line chart
   const lineMargin = { top: 40, right: 100, bottom: 35, left: 100 },
         lineWidth = 800 - lineMargin.left - lineMargin.right,
@@ -35,4 +36,18 @@ document.addEventListener("DOMContentLoaded", () => {
     line = new LineChart(lineSVG, lineMargin, lineWidth, lineHeight);
     line.display(e.target.value);
   });
+
+
+
+  // BAR CHART
+  // set margins
+  const barM = { top: 20, right: 30, bottom: 40, left: 90 },
+        barW = 900 - barM.left - barM.right,
+        barH = 400 - barM.top - barM.bottom;
+
+  // create svg
+  const barID = "bar-chart-container";
+  const barSVG = createSVG("#bar-chart", barID, barM, barW, barH);
+
+  
 })
