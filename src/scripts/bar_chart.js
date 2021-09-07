@@ -22,17 +22,28 @@ class BarChart {
     return [x, y];
   };
 
+  drawAxes(x, y) {
+    this.svg.append("g")
+      .attr("transform", "translate(0," + this.height + ")")
+      .call(d3.axisBottom(x));
+      // .selectAll("text")
+      //   .attr("transform", "translate(-10,0)rotate(-45)")
+      //   .style("text-anchor", "end");
+
+    this.svg.append("g")
+      .call(d3.axisLeft(y));    
+  };
+
   display(type) {
     fetch(`https://disease.sh/v3/covid-19/countries`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
         const newData = formatBarData(data, type); // format data
 
-        let [x, y] = this.scaleData(newData);
+        let [x, y] = this.scaleData(newData); // scale data for plotting
+        this.drawAxes(x, y); // draw axes
 
-        console.log(newData);
-        console.log(x);
-        console.log(y);
+        
       });
   };
 };
