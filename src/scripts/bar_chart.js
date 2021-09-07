@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { formatBarData } from "./helpers/format_data";
 
 class BarChart {
   constructor(svg, margin, width, height) {
@@ -12,7 +13,7 @@ class BarChart {
     fetch(`https://disease.sh/v3/covid-19/countries`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
-        console.log(data);
+        formatBarData(data, type);
       });
   };
 };

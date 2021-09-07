@@ -53,4 +53,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // display default
   let bar = new BarChart(barSVG, barM, barW, barH);
   bar.display("cases");
-})
+});
