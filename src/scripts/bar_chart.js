@@ -13,7 +13,8 @@ class BarChart {
     fetch(`https://disease.sh/v3/covid-19/countries`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
-        formatBarData(data, type);
+        const newData = formatBarData(data, type);
+        console.log(newData);
       });
   };
 };
