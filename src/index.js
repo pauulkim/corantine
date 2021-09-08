@@ -7,18 +7,18 @@ import dropdown from "./scripts/helpers/dropdown";
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
 
+  // set margins for both charts
+  const margin = { top: 40, right: 100, bottom: 35, left: 100 },
+        width = 800 - margin.left - margin.right,
+        height = 450 - margin.top - margin.bottom;
+        
   // LINE CHART
-  // set margins for line chart
-  const lineMargin = { top: 40, right: 100, bottom: 35, left: 100 },
-        lineWidth = 800 - lineMargin.left - lineMargin.right,
-        lineHeight = 450 - lineMargin.top - lineMargin.bottom;
-
   // create svg element for line chart
   const lineID = "line-chart-container";
-  const lineSVG = createSVG("#line-chart", lineID, lineMargin, lineWidth, lineHeight);
+  const lineSVG = createSVG("#line-chart", lineID, margin, width, height);
 
   // display default line chart
-  let line = new LineChart(lineSVG, lineMargin, lineWidth, lineHeight);
+  let line = new LineChart(lineSVG, margin, width, height);
   line.display(30);
 
   // create dropdown for linechart
@@ -34,23 +34,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // event listener for days selected
   selectedDays.on("change", e => {
     d3.selectAll(`#${lineID} > *`).remove();
-    line = new LineChart(lineSVG, lineMargin, lineWidth, lineHeight);
+    line = new LineChart(lineSVG, margin, width, height);
     line.display(e.target.value);
   });
 
 
 
   // BAR CHART
-  // set margins
-  const barM = { top: 40, right: 100, bottom: 35, left: 100 },
-        barW = 800 - barM.left - barM.right,
-        barH = 450 - barM.top - barM.bottom;
-
   // create svg
   const barID = "bar-chart-container";
-  const barSVG = createSVG("#bar-chart", barID, barM, barW, barH);
+  const barSVG = createSVG("#bar-chart", barID, margin, width, height);
 
   // display default
-  let bar = new BarChart(barSVG, barM, barW, barH);
+  let bar = new BarChart(barSVG, margin, width, height);
   bar.display("cases");
 });
