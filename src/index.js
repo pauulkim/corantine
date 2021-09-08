@@ -55,5 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Recovered": "recovered",
                     "Tests": "tests"};
   
-  let selectedCategory = dropdown("#category", category, "Select a Category")
+  let selectedCategory = dropdown("#category", category, "Select a Category");
+
+  // event listener for category
+  selectedCategory.on("change", e => {
+    d3.selectAll(`#${barID} > *`).remove();
+    bar = new BarChart(barSVG, margin, width, height);
+    bar.display(e.target.value);
+  });
 });

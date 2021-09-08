@@ -25,7 +25,7 @@ class BarChart {
   drawAxes(x, y) {
     this.svg.append("g")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x).ticks(7));
       // .selectAll("text")
       //   .attr("transform", "translate(-10,0)rotate(-45)")
       //   .style("text-anchor", "end");
