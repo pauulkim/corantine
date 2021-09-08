@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import mouse from "d3";
 import { formatLineData } from "./helpers/format_data";
 
 class LineChart {
@@ -98,6 +99,10 @@ class LineChart {
       );
   };
 
+  hover() {
+    
+  };
+
   display(numDays) {
     // get data
     fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=${numDays}`)
@@ -114,6 +119,87 @@ class LineChart {
         // draw lines
         this.drawLines(cases, x, y, "steelblue");
         this.drawLines(deaths, x, y, "red");
+        // add hover effect
+        this.hover();
+
+
+        // This allows to find the closest X index of the mouse:
+        const bisect = d3.bisector(d => d.date);
+
+        // Create the circle that travels along the curve of chart
+        var focus = this.svg
+          .append('g')
+          .append('circle')
+            .style("fill", "none")
+            .attr("stroke", "black")
+            .attr('r', 8.5)
+            .style("opacity", 0)
+        var focus2 = this.svg
+          .append('g')
+          .append('circle')
+            .style("fill", "none")
+            .attr("stroke", "black")
+            .attr('r', 8.5)
+            .style("opacity", 0)
+
+        // Create the text that travels along the curve of chart
+        var focusText = this.svg
+          .append('g')
+          .append('text')
+            .style("opacity", 0)
+            .attr("text-anchor", "left")
+            .attr("alignment-baseline", "middle")
+
+        // Create a rect on top of the svg area: this rectangle recovers mouse position
+        this.svg
+          .append('rect')
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .attr('width', this.width)
+          .attr('height', this.height)
+          .on('mouseover', mouseover)
+          .on('mousemove', mousemove)
+          .on('mouseout', mouseout);
+
+
+        // What happens when the mouse move -> show the annotations at the right positions.
+        function mouseover() {
+          focus.style("opacity", 1)
+          focus2.style("opacity", 1)
+          focusText.style("opacity",1)
+        }
+
+        function mousemove(event) {
+          
+          // recover coordinate we need
+          var x0 = x.invert(d3.pointer(event)[0]);
+
+          var i = bisect.left(cases, x0);
+          const selectedCases = cases[i]
+
+          var j = bisect.left(deaths, x0);
+          const selectedDeaths = deaths[i]
+          focus
+            .attr("cx", x(selectedCases.date))
+            .attr("cy", y(selectedCases.value))
+          
+          focus2
+            .attr("cx", x(selectedDeaths.date))
+            .attr("cy", y(selectedDeaths.value))
+
+          // focusText
+          //   .html("x:" + selectedCases.date + "  -  " + "y:" + selectedCases.value)
+          //   .attr("x", x(selectedCases.date)+15)
+          //   .attr("y", y(selectedCases.value))
+          }
+          
+        function mouseout() {
+          focus.style("opacity", 0)
+          focus2.style("opacity", 0)
+          focusText.style("opacity", 0)
+        }
+
+        
       });
   };
 };
