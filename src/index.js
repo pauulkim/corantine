@@ -48,4 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // display default
   let bar = new BarChart(barSVG, margin, width, height);
   bar.display("cases");
+
+  // create dropdown
+  const category = {"Cases": "cases",
+                    "Deaths": "deaths",
+                    "Recovered": "recovered",
+                    "Tests": "tests"};
+  
+  let selectedCategory = dropdown("#category", category, "Select a Category")
 });
