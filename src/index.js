@@ -42,9 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // BAR CHART
   // set margins
-  const barM = { top: 20, right: 30, bottom: 40, left: 90 },
-        barW = 900 - barM.left - barM.right,
-        barH = 400 - barM.top - barM.bottom;
+  const barM = { top: 40, right: 100, bottom: 35, left: 100 },
+        barW = 800 - barM.left - barM.right,
+        barH = 450 - barM.top - barM.bottom;
 
   // create svg
   const barID = "bar-chart-container";
