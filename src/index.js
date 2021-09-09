@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("header").innerHTML = "Welcome to Corantine";
 
   // set margins for both charts
-  const margin = { top: 40, right: 100, bottom: 35, left: 100 },
-        width = 800 - margin.left - margin.right,
+  const margin = { top: 40, right: 150, bottom: 35, left: 100 },
+        width = 850 - margin.left - margin.right,
         height = 450 - margin.top - margin.bottom;
         
   // LINE CHART
