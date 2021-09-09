@@ -115,7 +115,7 @@ class LineChart {
         .attr("text-anchor", "left")
         .attr("alignment-baseline", textAlignment);
     
-    return [ [hoverCircle, hoverText, data] ];
+    return [ { circle: hoverCircle, text: hoverText, data } ];
   };
 
   addHoverEvents(hoverElements, x, y) {
