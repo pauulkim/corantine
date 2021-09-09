@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { formatLineData } from "./helpers/format_data";
+import { mouseover } from "./helpers/mouse_hover";
 
 class LineChart {
   constructor(svg, margin, width, height) {
@@ -117,6 +118,21 @@ class LineChart {
     return [ [hoverCircle, hoverText] ];
   };
 
+  addHoverEvents(hoverElements) {
+    // create rect over svg area that listens to mouse movements
+    this.svg.append("rect")
+      .style("fill", "none")
+      .style("pointer-events", "all")
+      .attr("width", this.width)
+      .attr("height", this.height)
+      .on("mouseover", () => mouseover(hoverElements))
+
+
+    
+    // .on('mousemove', () => mousemove())
+    // .on('mouseout', mouseout);
+  };
+
   display(numDays) {
     // get data
     fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=${numDays}`)
@@ -136,33 +152,22 @@ class LineChart {
         this.drawLines(deaths, x, y, "red");
 
         // add hover effect
+        // create hover elements
         let casesHover = this.createHoverElements("steelblue", 6, 0, "middle"); 
         let deathsHover = this.createHoverElements("red", 6, 0, "middle"); 
+        let combinedHover = casesHover.concat(deathsHover);
         
-        console.log(casesHover.concat(deathsHover));
-
-        
-
+        this.addHoverEvents(combinedHover); // add the hover event listeners
         
 
-        // // Create a rect on top of the svg area: this rectangle recovers mouse position
-        // this.svg
-        //   .append('rect')
-        //   .style("fill", "none")
-        //   .style("pointer-events", "all")
-        //   .attr('width', this.width)
-        //   .attr('height', this.height)
-        //   .on('mouseover', () => mouseover(focus, focusText))
-        //   .on('mousemove', () => mousemove())
-        //   .on('mouseout', mouseout);
+        
+
+        
+
+        
 
 
-        // // What happens when the mouse move -> show the annotations at the right positions.
-        // function mouseover() {
-        //   focus.style("opacity", 1)
-        //   focus2.style("opacity", 1)
-        //   focusText.style("opacity",1)
-        // }
+        
 
         // function mousemove() {
         //   // This allows to find the closest X index of the mouse:
