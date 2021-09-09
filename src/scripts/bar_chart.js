@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { formatBarData } from "./helpers/format_data";
+import { barMouseover } from "./helpers/mouse_hover";
 
 class BarChart {
   constructor(svg, margin, width, height) {
@@ -62,17 +63,6 @@ class BarChart {
       .text("Country");
   };
 
-  drawBars(data, x, y) {
-    this.svg.selectAll("bars")
-      .data(data)
-      .join("rect")
-      .attr("x", x(0))
-      .attr("y", d => y(d.country))
-      .attr("width", d => x(d.value))
-      .attr("height", y.bandwidth())
-      .attr("fill", "#69b3a2");
-  };
-
   createTooltip() {
     const tooltip = d3.select("#bar-chart")
       .append("div")
@@ -87,20 +77,35 @@ class BarChart {
     return tooltip;
   };
 
+  drawBars(data, x, y, tooltip) {
+    this.svg.selectAll("bars")
+      .data(data)
+      .join("rect")
+      .attr("x", x(0))
+      .attr("y", d => y(d.country))
+      .attr("width", d => x(d.value))
+      .attr("height", y.bandwidth())
+      .attr("fill", "#69b3a2")
+      .on("mouseover", () => barMouseover(tooltip))
+
+    
+      // .on("mousemove", mousemove)
+      // .on("mouseleave", mouseleave)
+  };
+
   display(type) {
     fetch(`https://disease.sh/v3/covid-19/countries`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
         const newData = formatBarData(data, type); // format data
 
-        // draw graph
         let [x, y] = this.scaleData(newData); // scale data for plotting
         this.drawAxes(x, y); // draw axes
         this.addLabels(type); // add labels
-        this.drawBars(newData, x, y); // draw the bars
-
-        // add hover 
+        
+        // draw bars with hover effect
         let tooltip = this.createTooltip();
+        this.drawBars(newData, x, y, tooltip); 
       });
   };
 };

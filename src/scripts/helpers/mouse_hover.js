@@ -45,18 +45,16 @@ export const lineMouseout = elements => {
 
 
 // for bar chart
+export const barMouseover = (tooltip) => {
+  // get values of selected bar
+  const selectedData = event.path[0].__data__;
+
+  tooltip
+    .text(`${selectedData.country}: ${selectedData.value}`)
+    .style("opacity", 1);
+};
 
 
-
-
-  // Three function that change the tooltip when user hover / move / leave a cell
-  // var mouseover = function(d) {
-  //   var subgroupName = d3.select(this.parentNode).datum().key;
-  //   var subgroupValue = d.data[subgroupName];
-  //   tooltip
-  //       .html("subgroup: " + subgroupName + "<br>" + "Value: " + subgroupValue)
-  //       .style("opacity", 1)
-  // }
   // var mousemove = function(d) {
   //   tooltip
   //     .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
@@ -67,25 +65,6 @@ export const lineMouseout = elements => {
   //     .style("opacity", 0)
   // }
 
-
-
-
-  // // Show the bars
-  // svg.append("g")
-  //   .selectAll("g")
-  //   // Enter in the stack data = loop key per key = group per group
-  //   .data(stackedData)
-  //   .enter().append("g")
-  //     .attr("fill", function(d) { return color(d.key); })
-  //     .selectAll("rect")
-  //     // enter a second time = loop subgroup per subgroup to add all rectangles
-  //     .data(function(d) { return d; })
-  //     .enter().append("rect")
-  //       .attr("x", function(d) { return x(d.data.group); })
-  //       .attr("y", function(d) { return y(d[1]); })
-  //       .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-  //       .attr("width",x.bandwidth())
-  //       .attr("stroke", "grey")
-  //     .on("mouseover", mouseover)
-  //     .on("mousemove", mousemove)
-  //     .on("mouseleave", mouseleave)
+  // Show the bars
+  
+      
