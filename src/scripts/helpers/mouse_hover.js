@@ -34,11 +34,9 @@ export const mousemove = (elements, x, y) => {
   });  
 };
 
-
-
-
-// function mouseout() {
-        //   focus.style("opacity", 0)
-        //   focus2.style("opacity", 0)
-        //   focusText.style("opacity", 0)
-        // }
+export const mouseout = elements => {
+  elements.forEach( ele => {
+    ele.circle.style("opacity", 0);
+    ele.text.style("opacity", 0);
+  });
+};

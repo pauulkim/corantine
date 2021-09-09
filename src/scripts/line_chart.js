@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { formatLineData } from "./helpers/format_data";
-import { mouseover, mousemove } from "./helpers/mouse_hover";
+import { mouseover, mousemove, mouseout } from "./helpers/mouse_hover";
 
 class LineChart {
   constructor(svg, margin, width, height) {
@@ -126,8 +126,7 @@ class LineChart {
       .attr("height", this.height)
       .on("mouseover", () => mouseover(hoverElements))
       .on("mousemove", () => mousemove(hoverElements, x, y))
-
-    // .on('mouseout', mouseout);
+      .on("mouseout", () => mouseout(hoverElements));
   };
 
   display(numDays) {
