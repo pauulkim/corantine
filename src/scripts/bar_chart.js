@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { formatBarData } from "./helpers/format_data";
-import { barMouseover } from "./helpers/mouse_hover";
+import { barMouseover, barMousemove } from "./helpers/mouse_hover";
 
 class BarChart {
   constructor(svg, margin, width, height) {
@@ -87,6 +87,7 @@ class BarChart {
       .attr("height", y.bandwidth())
       .attr("fill", "#69b3a2")
       .on("mouseover", () => barMouseover(tooltip))
+      .on("mousemove", () => barMousemove(tooltip))
 
     
       // .on("mousemove", mousemove)
