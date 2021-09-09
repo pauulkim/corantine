@@ -99,7 +99,7 @@ class LineChart {
       );
   };
 
-  createHoverElements(circleStroke, circleSize, opacity, textAlignment) {
+  createHoverElements(circleStroke, circleSize, opacity, textAlignment, data) {
     // create circle that moves along line
     const hoverCircle = this.svg.append("g")
       .append("circle")
@@ -115,10 +115,10 @@ class LineChart {
         .attr("text-anchor", "left")
         .attr("alignment-baseline", textAlignment);
     
-    return [ [hoverCircle, hoverText] ];
+    return [ [hoverCircle, hoverText, data] ];
   };
 
-  addHoverEvents(hoverElements) {
+  addHoverEvents(hoverElements, x, y) {
     // create rect over svg area that listens to mouse movements
     this.svg.append("rect")
       .style("fill", "none")
@@ -126,7 +126,7 @@ class LineChart {
       .attr("width", this.width)
       .attr("height", this.height)
       .on("mouseover", () => mouseover(hoverElements))
-      .on("mousemove", () => mousemove(hoverElements))
+      .on("mousemove", () => mousemove(hoverElements, x, y))
 
     // .on('mouseout', mouseout);
   };
@@ -151,10 +151,10 @@ class LineChart {
 
         // add hover effect
         // create hover elements
-        let casesHover = this.createHoverElements("steelblue", 6, 0, "middle"); 
-        let deathsHover = this.createHoverElements("red", 6, 0, "middle"); 
+        let casesHover = this.createHoverElements("steelblue", 6, 0, "middle", cases); 
+        let deathsHover = this.createHoverElements("red", 6, 0, "middle", deaths); 
         let combinedHover = casesHover.concat(deathsHover);
-        this.addHoverEvents(combinedHover); // add the hover event listeners
+        this.addHoverEvents(combinedHover, x, y); // add the hover event listeners
       });
   };
 };

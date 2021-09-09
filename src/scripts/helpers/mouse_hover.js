@@ -7,16 +7,17 @@ export const mouseover = elements => {
   });
 };
 
-export const mousemove = elements => {
-  // console.log(elements);
+export const mousemove = (elements, x, y) => {
+  // find closest x index of mouse
+  const bisect = d3.bisector( d => d.date );
+
+  // get the right x coordinate in date form
+  const x0 = x.invert(d3.pointer(event)[0]);
+
+
+  console.log(x0)
 };
 
-
-//   // This allows to find the closest X index of the mouse:
-// const bisect = d3.bisector(d => d.date);
-
-//   // recover coordinate we need
-//   var x0 = x.invert(d3.pointer(event)[0]);
 
 //   var i = bisect.left(cases, x0);
 //   const selectedCases = cases[i]
