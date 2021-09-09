@@ -73,16 +73,34 @@ class BarChart {
       .attr("fill", "#69b3a2");
   };
 
+  createTooltip() {
+    const tooltip = d3.select("#bar-chart")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "5px");
+    
+    return tooltip;
+  };
+
   display(type) {
     fetch(`https://disease.sh/v3/covid-19/countries`)
       .then( apiResponse => apiResponse.json() )
       .then( data => {
         const newData = formatBarData(data, type); // format data
 
+        // draw graph
         let [x, y] = this.scaleData(newData); // scale data for plotting
         this.drawAxes(x, y); // draw axes
         this.addLabels(type); // add labels
         this.drawBars(newData, x, y); // draw the bars
+
+        // add hover 
+        let tooltip = this.createTooltip();
       });
   };
 };
