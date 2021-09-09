@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import mouse from "d3";
 import { formatLineData } from "./helpers/format_data";
 
 class LineChart {
@@ -99,8 +98,23 @@ class LineChart {
       );
   };
 
-  hover() {
+  createHoverElements(circleStroke, circleSize, opacity, textAlignment) {
+    // create circle that moves along line
+    const hoverCircle = this.svg.append("g")
+      .append("circle")
+        .style("fill", "none")
+        .attr("stroke", circleStroke)
+        .attr("r", circleSize)
+        .style("opacity", opacity);
+
+    // create text that moves along line
+    const hoverText = this.svg.append("g")
+      .append("text")
+        .style("opacity", opacity)
+        .attr("text-anchor", "left")
+        .attr("alignment-baseline", textAlignment);
     
+    return [ [hoverCircle, hoverText] ];
   };
 
   display(numDays) {
@@ -112,6 +126,7 @@ class LineChart {
         let cases = formatLineData(data, "cases");
         let deaths = formatLineData(data, "deaths");
 
+        // plotting
         let [x, y] = this.scaleData(cases); // get scaling functions to plot
         this.drawAxes(x, y); // draw axes
         this.addLabels(numDays); // add labels
@@ -119,85 +134,67 @@ class LineChart {
         // draw lines
         this.drawLines(cases, x, y, "steelblue");
         this.drawLines(deaths, x, y, "red");
+
         // add hover effect
-        this.hover();
+        let casesHover = this.createHoverElements("steelblue", 6, 0, "middle"); 
+        let deathsHover = this.createHoverElements("red", 6, 0, "middle"); 
+        
+        console.log(casesHover.concat(deathsHover));
+
+        
+
+        
+
+        // // Create a rect on top of the svg area: this rectangle recovers mouse position
+        // this.svg
+        //   .append('rect')
+        //   .style("fill", "none")
+        //   .style("pointer-events", "all")
+        //   .attr('width', this.width)
+        //   .attr('height', this.height)
+        //   .on('mouseover', () => mouseover(focus, focusText))
+        //   .on('mousemove', () => mousemove())
+        //   .on('mouseout', mouseout);
 
 
-        // This allows to find the closest X index of the mouse:
-        const bisect = d3.bisector(d => d.date);
+        // // What happens when the mouse move -> show the annotations at the right positions.
+        // function mouseover() {
+        //   focus.style("opacity", 1)
+        //   focus2.style("opacity", 1)
+        //   focusText.style("opacity",1)
+        // }
 
-        // Create the circle that travels along the curve of chart
-        var focus = this.svg
-          .append('g')
-          .append('circle')
-            .style("fill", "none")
-            .attr("stroke", "black")
-            .attr('r', 8.5)
-            .style("opacity", 0)
-        var focus2 = this.svg
-          .append('g')
-          .append('circle')
-            .style("fill", "none")
-            .attr("stroke", "black")
-            .attr('r', 8.5)
-            .style("opacity", 0)
+        // function mousemove() {
+        //   // This allows to find the closest X index of the mouse:
+        // const bisect = d3.bisector(d => d.date);
 
-        // Create the text that travels along the curve of chart
-        var focusText = this.svg
-          .append('g')
-          .append('text')
-            .style("opacity", 0)
-            .attr("text-anchor", "left")
-            .attr("alignment-baseline", "middle")
+        //   // recover coordinate we need
+        //   var x0 = x.invert(d3.pointer(event)[0]);
 
-        // Create a rect on top of the svg area: this rectangle recovers mouse position
-        this.svg
-          .append('rect')
-          .style("fill", "none")
-          .style("pointer-events", "all")
-          .attr('width', this.width)
-          .attr('height', this.height)
-          .on('mouseover', mouseover)
-          .on('mousemove', mousemove)
-          .on('mouseout', mouseout);
+        //   var i = bisect.left(cases, x0);
+        //   const selectedCases = cases[i]
 
-
-        // What happens when the mouse move -> show the annotations at the right positions.
-        function mouseover() {
-          focus.style("opacity", 1)
-          focus2.style("opacity", 1)
-          focusText.style("opacity",1)
-        }
-
-        function mousemove(event) {
+        //   var j = bisect.left(deaths, x0);
+        //   const selectedDeaths = deaths[i]
+        //   focus
+        //     .attr("cx", x(selectedCases.date))
+        //     .attr("cy", y(selectedCases.value))
           
-          // recover coordinate we need
-          var x0 = x.invert(d3.pointer(event)[0]);
+        //   focus2
+        //     .attr("cx", x(selectedDeaths.date))
+        //     .attr("cy", y(selectedDeaths.value))
 
-          var i = bisect.left(cases, x0);
-          const selectedCases = cases[i]
-
-          var j = bisect.left(deaths, x0);
-          const selectedDeaths = deaths[i]
-          focus
-            .attr("cx", x(selectedCases.date))
-            .attr("cy", y(selectedCases.value))
+        //   // focusText
+        //   //   .html("x:" + selectedCases.date + "  -  " + "y:" + selectedCases.value)
+        //   //   .attr("x", x(selectedCases.date)+15)
+        //   //   .attr("y", y(selectedCases.value))
+        //   }
           
-          focus2
-            .attr("cx", x(selectedDeaths.date))
-            .attr("cy", y(selectedDeaths.value))
-
-          // focusText
-          //   .html("x:" + selectedCases.date + "  -  " + "y:" + selectedCases.value)
-          //   .attr("x", x(selectedCases.date)+15)
-          //   .attr("y", y(selectedCases.value))
-          }
-          
-        function mouseout() {
-          focus.style("opacity", 0)
-          focus2.style("opacity", 0)
-          focusText.style("opacity", 0)
-        }
+        // function mouseout() {
+        //   focus.style("opacity", 0)
+        //   focus2.style("opacity", 0)
+        //   focusText.style("opacity", 0)
+        // }
 
         
       });
