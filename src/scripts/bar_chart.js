@@ -64,12 +64,11 @@ class BarChart {
   };
 
   createTooltip() {
-    const tooltip = d3.select("#bar-chart")
-      .append("div")
+    const tooltip = this.svg.append("text")
       .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "white")
-      .style("border", "solid")
+      // .attr("class", "tooltip")
+      // .style("background-color", "white")
+      // .style("border", "solid")
       .style("border-width", "1px")
       .style("border-radius", "5px")
       .style("padding", "5px");
