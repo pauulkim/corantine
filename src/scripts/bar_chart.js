@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { formatBarData } from "./helpers/format_data";
-import { barMouseover, barMousemove } from "./helpers/mouse_hover";
+import { barMouseover, barMousemove, barMouseLeave } from "./helpers/mouse_hover";
 
 class BarChart {
   constructor(svg, margin, width, height) {
@@ -66,13 +66,7 @@ class BarChart {
   createTooltip() {
     const tooltip = this.svg.append("text")
       .style("opacity", 0)
-      // .attr("class", "tooltip")
-      // .style("background-color", "white")
-      // .style("border", "solid")
-      .style("border-width", "1px")
-      .style("border-radius", "5px")
-      .style("padding", "5px");
-    
+
     return tooltip;
   };
 
@@ -87,10 +81,7 @@ class BarChart {
       .attr("fill", "#69b3a2")
       .on("mouseover", () => barMouseover(tooltip))
       .on("mousemove", () => barMousemove(tooltip))
-
-    
-      // .on("mousemove", mousemove)
-      // .on("mouseleave", mouseleave)
+      .on("mouseleave", () => barMouseLeave(tooltip));
   };
 
   display(type) {

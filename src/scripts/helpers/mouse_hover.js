@@ -32,46 +32,40 @@ export const lineMousemove = (elements, x, y) => {
       .style("font-size", "14px")
       .text(`${d3.timeFormat("%b %d, %Y")(selectedData.date)}: ${selectedData.value}`);
       
-  });  
-};
-
-export const lineMouseout = elements => {
-  elements.forEach( ele => {
-    ele.circle.style("opacity", 0);
-    ele.text.style("opacity", 0);
-  });
-};
-
-
-
-// for bar chart
-export const barMouseover = (tooltip) => {
-  // get values of selected bar
-  const selectedData = event.path[0].__data__;
-
-  tooltip
-    .text(`${selectedData.country}: ${selectedData.value}`)
-    .style("opacity", 1);
+    });  
+  };
+  
+  export const lineMouseout = elements => {
+    elements.forEach( ele => {
+      ele.circle.style("opacity", 0);
+      ele.text.style("opacity", 0);
+    });
+  };
+  
+  
+  
+  // for bar chart
+  export const barMouseover = (tooltip) => {
+    // get values of selected bar
+    const selectedData = event.path[0].__data__;
+    // make hover text in the very front
+    tooltip.raise();
+    
+    tooltip
+      .text(`${selectedData.country}: ${selectedData.value}`)
+      .style("font-size", "14px")
+      .style("opacity", 1);
 };
 
 export const barMousemove = tooltip => {
   const mouseLocation = d3.pointer(event);
-  console.log(mouseLocation)
 
   tooltip
-    .attr("x", mouseLocation[0] + 90)
-    .attr("y", mouseLocation[1])
-}
+    .attr("x", mouseLocation[0] + 15)
+    .attr("y", mouseLocation[1]);
+};
 
-  //   tooltip
-  //     .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-  //     .style("top", (d3.mouse(this)[1]) + "px")
-  // }
-  // var mouseleave = function(d) {
-  //   tooltip
-  //     .style("opacity", 0)
-  // }
-
-  // Show the bars
-  
-      
+export const barMouseLeave = tooltip => {
+  tooltip
+    .style("opacity", 0);
+};
