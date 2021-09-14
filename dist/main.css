@@ -59,3 +59,9 @@ body {
   font-family: "Segoe UI";
   background: #17191F;
 }
+
+#header-title {
+  color: white;
+  font-weight: 650;
+  font-size: 50px;
+}
