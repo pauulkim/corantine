@@ -60,8 +60,19 @@ body {
   background: #17191F;
 }
 
-#header-title {
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+#header * {
   color: white;
+  font-size: 48px;
+}
+#header > h1 {
   font-weight: 650;
-  font-size: 50px;
+}
+#header > #header-links > a {
+  padding-left: 5px;
 }
