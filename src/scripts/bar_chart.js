@@ -35,15 +35,7 @@ class BarChart {
       .call(d3.axisLeft(y));    
   };
 
-  addLabels(value) {
-    // add title
-    this.svg.append("text")
-      .attr("x", (this.width / 2))
-      .attr("y", 0 - (this.margin.top / 2))
-      .attr("text-anchor", "middle")
-      .style("font-size", "18px")
-      .text(`Top 10 Countries with Highest Number of Covid ${value[0].toUpperCase() + value.slice(1)}`);
-
+  addLabels() {
     // add x axis label
     this.svg.append("text")
       .attr("x", (this.width / 2))
@@ -92,7 +84,7 @@ class BarChart {
 
         let [x, y] = this.scaleData(newData); // scale data for plotting
         this.drawAxes(x, y); // draw axes
-        this.addLabels(type); // add labels
+        this.addLabels(); // add labels
         
         // draw bars with hover effect
         let tooltip = this.createTooltip();

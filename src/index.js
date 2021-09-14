@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // display default
   let bar = new BarChart(barSVG, margin, width, height);
   bar.display("cases");
+  let barTitle = d3.select("#bar-graph-title")
+    .text(`Top 10 Countries with Highest Number of Covid Cases`);
 
   // create dropdown
   const category = {"Cases": "cases",
@@ -64,5 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     d3.selectAll(`#${barID} > *`).remove();
     bar = new BarChart(barSVG, margin, width, height);
     bar.display(e.target.value);
+    barTitle
+      .text(`Top 10 Countries with Highest Number of Covid ${e.target.value[0].toUpperCase() + e.target.value.slice(1)}`);
   });
 });

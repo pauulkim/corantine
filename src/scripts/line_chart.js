@@ -33,15 +33,7 @@ class LineChart {
       .call(d3.axisLeft(y));
   };
 
-  addLabels(numDays) {
-    // add title
-    this.svg.append("text")
-      .attr("x", (this.width / 2))
-      .attr("y", 0 - (this.margin.top / 2))
-      .attr("text-anchor", "middle")
-      .style("font-size", "18px")
-      .text(`Number of Covid Cases and Deaths Globally in the Past ${numDays} Days`);
-
+  addLabels() {
     // add x axis label
     this.svg.append("text")
       .attr("x", (this.width / 2))
@@ -141,7 +133,7 @@ class LineChart {
         // plotting
         let [x, y] = this.scaleData(cases); // get scaling functions to plot
         this.drawAxes(x, y); // draw axes
-        this.addLabels(numDays); // add labels
+        this.addLabels(); // add labels
         this.addLegend(); // add legend
         // draw lines
         this.drawLines(cases, x, y, "steelblue");
