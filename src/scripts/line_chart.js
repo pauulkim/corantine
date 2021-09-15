@@ -38,18 +38,16 @@ class LineChart {
     this.svg.append("text")
       .attr("x", (this.width / 2))
       .attr("y", this.height + this.margin.bottom)
-      .attr("text-anchor", "middle")
-      .style("font-size", "14px")
+      .attr("class", "axis-label")
       .text("Date");
-
+      
     // add y axis label
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - this.margin.left)
       .attr("x", 0 - (this.height / 2))
       .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .style("font-size", "14px")
+      .attr("class", "axis-label")
       .text("Value");
   };
 

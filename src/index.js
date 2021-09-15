@@ -6,9 +6,9 @@ import dropdown from "./scripts/helpers/dropdown";
 
 document.addEventListener("DOMContentLoaded", () => {
   // set margins for both charts
-  const margin = { top: 40, right: 160, bottom: 35, left: 100 },
-        width = 1200 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+  const margin = { top: 30, right: 160, bottom: 35, left: 100 },
+        width = 900 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
         
   // LINE CHART
   // create svg element for line chart

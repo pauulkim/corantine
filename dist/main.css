@@ -108,3 +108,9 @@ body {
   font-size: 14px;
   width: 130px;
 }
+
+.axis-label {
+  stroke: white;
+  font-size: 16px;
+  font-weight: 100;
+}
