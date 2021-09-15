@@ -54,27 +54,27 @@ class LineChart {
   addLegend() {
     // cases
     this.svg.append("circle")
-      .attr("cx", 680)
+      .attr("cx", 700)
       .attr("cy", 30)
       .attr("r", 5)
       .style("fill", "steelblue");
     this.svg.append("text")
-      .attr("x", 680 + 10)
+      .attr("x", 700 + 10)
       .attr("y", 30)
-      .style("font-size", "14px")
+      .attr("class", "line-legend")
       .attr("alignment-baseline","middle")
       .text("cases");
 
     // deaths
     this.svg.append("circle")
-      .attr("cx", 680)
-      .attr("cy", 45)
+      .attr("cx", 700)
+      .attr("cy", 30 + 15)
       .attr("r", 5)
       .style("fill", "red");
     this.svg.append("text")
-      .attr("x", 680 + 10)
-      .attr("y", 45)
-      .style("font-size", "14px")
+      .attr("x", 700 + 10)
+      .attr("y", 30 + 15)
+      .attr("class", "line-legend")
       .attr("alignment-baseline","middle")
       .text("deaths");
   };
