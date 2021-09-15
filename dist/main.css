@@ -95,3 +95,14 @@ body {
   font-size: 24px;
   font-weight: 500;
 }
+
+.graph-select {
+  font-size: 18px;
+  font-weight: 450;
+}
+.graph-select > p {
+  padding: 5px 0;
+}
+.graph-select > select {
+  font-family: "Segoe UI";
+}

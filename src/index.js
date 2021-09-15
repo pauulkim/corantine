@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Recovered": "recovered",
                     "Tests": "tests"};
   
-  let selectedCategory = dropdown("#category", category, "Select a Category");
+  let selectedCategory = dropdown("#category", category, "Select a category");
 
   // event listener for category
   selectedCategory.on("change", e => {

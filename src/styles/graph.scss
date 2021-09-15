@@ -16,3 +16,17 @@
   font-size: 24px;
   font-weight: 500;
 }
+
+.graph-select {
+  font-size: 18px;
+  font-weight: 450;
+  
+  > p {
+    padding: 5px 0;
+  }
+
+  > select {
+    font-family: "Segoe UI";
+  }
+
+}
