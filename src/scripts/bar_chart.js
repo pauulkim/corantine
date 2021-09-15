@@ -56,6 +56,7 @@ class BarChart {
   createTooltip() {
     const tooltip = this.svg.append("text")
       .style("opacity", 0)
+      .attr("class", "hover-text");
 
     return tooltip;
   };
