@@ -29,32 +29,29 @@ export const lineMousemove = (elements, x, y) => {
     ele.text
       .attr("x", x(selectedData.date) + 5)
       .attr("y", y(selectedData.value) - 15)
-      .style("font-size", "14px")
       .text(`${d3.timeFormat("%b %d, %Y")(selectedData.date)}: ${selectedData.value}`);
-      
     });  
-  };
+};
+
+export const lineMouseout = elements => {
+  elements.forEach( ele => {
+    ele.circle.style("opacity", 0);
+    ele.text.style("opacity", 0);
+  });
+};
   
-  export const lineMouseout = elements => {
-    elements.forEach( ele => {
-      ele.circle.style("opacity", 0);
-      ele.text.style("opacity", 0);
-    });
-  };
   
   
+// for bar chart
+export const barMouseover = (tooltip) => {
+  // get values of selected bar
+  const selectedData = event.path[0].__data__;
+  // make hover text in the very front
+  tooltip.raise();
   
-  // for bar chart
-  export const barMouseover = (tooltip) => {
-    // get values of selected bar
-    const selectedData = event.path[0].__data__;
-    // make hover text in the very front
-    tooltip.raise();
-    
-    tooltip
-      .text(`${selectedData.country}: ${selectedData.value}`)
-      .style("font-size", "14px")
-      .style("opacity", 1);
+  tooltip
+    .text(`${selectedData.country}: ${selectedData.value}`)
+    .style("opacity", 1);
 };
 
 export const barMousemove = tooltip => {

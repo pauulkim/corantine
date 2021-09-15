@@ -33,7 +33,13 @@
 }
 
 .axis-label {
-  stroke: white;
+  fill: white;
   font-size: 16px;
-  font-weight: 100;
+  font-weight: 500;
+}
+
+.hover-text {
+  fill: white;
+  font-size: 14px;
+  //.attr("alignment-baseline", "middle");
 }

@@ -54,24 +54,26 @@ class LineChart {
   addLegend() {
     // cases
     this.svg.append("circle")
-      .attr("cx", 635)
+      .attr("cx", 680)
+      .attr("cy", 30)
       .attr("r", 5)
       .style("fill", "steelblue");
     this.svg.append("text")
-      .attr("x", 635 + 10)
+      .attr("x", 680 + 10)
+      .attr("y", 30)
       .style("font-size", "14px")
       .attr("alignment-baseline","middle")
       .text("cases");
 
     // deaths
     this.svg.append("circle")
-      .attr("cx", 635)
-      .attr("cy", 15)
+      .attr("cx", 680)
+      .attr("cy", 45)
       .attr("r", 5)
       .style("fill", "red");
     this.svg.append("text")
-      .attr("x", 635 + 10)
-      .attr("y", 15)
+      .attr("x", 680 + 10)
+      .attr("y", 45)
       .style("font-size", "14px")
       .attr("alignment-baseline","middle")
       .text("deaths");
@@ -102,7 +104,7 @@ class LineChart {
     const hoverText = this.svg.append("g")
       .append("text")
         .style("opacity", opacity)
-        .attr("alignment-baseline", "middle");
+        .attr("class", "hover-text");       
     
     return [ { circle: hoverCircle, text: hoverText, data } ];
   };
